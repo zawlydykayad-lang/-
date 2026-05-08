@@ -1,0 +1,45 @@
+{
+  "entities": {
+    "Plan": {
+      "title": "eSIM Plan",
+      "description": "An eSIM data plan for a specific region.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "region": { "type": "string" },
+        "data": { "type": "string", "description": "e.g. 5GB, 10GB, Unlimited" },
+        "duration": { "type": "string", "description": "e.g. 7 days, 30 days" },
+        "price": { "type": "number" },
+        "icon": { "type": "string", "description": "Lucide icon name" },
+        "stock": { "type": "number" },
+        "active": { "type": "boolean" }
+      },
+      "required": ["name", "region", "data", "duration", "price", "icon"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "A record of an eSIM purchase.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "planId": { "type": "string" },
+        "amount": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "completed", "failed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "planId", "amount", "status"]
+    }
+  },
+  "firestore": {
+    "plans": {
+      "schema": "Plan",
+      "description": "Available eSIM plans"
+    },
+    "orders": {
+      "schema": "Order",
+      "description": "User purchase history"
+    }
+  }
+}
